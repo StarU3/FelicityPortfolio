@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>My Portfolio</title>
+    <style>
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        padding-top: 100px;
+      }
+
+      nav {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: Black;
+        z-index: 99;
+      }
+
+      .nav__content {
+        max-width: var(--max-width);
+        margin: 10px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      nav .logo a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #31d4c4;
+        transition: 0.3s;
+      }
+
+      .hamburger {
+      display: block;
+      cursor: pointer;
+      background-color: black;
+      padding: 10px;
+      border-radius: 5px;
+      }
+
+      .hamburger span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background-color: cyan;
+      margin: 5px 0;
+      transition: 0.3s;
+      }
+
+
+
+      ul {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        list-style: none;
+        transition: left 0.3s;
+      }
+
+      ul li a {
+        padding: 0.5rem 1rem;
+        border: 2px solid transparent;
+        text-decoration: none;
+        font-weight: 600;
+        color: #31d4c4;
+        transition: 0.3s;
+      }
+
+      ul li a:hover {
+        color: cyan;
+      }
+
+      ul li a.active {
+        color: rgb(0, 255, 217);
+        border: 2px solid rgb(0, 255, 217);
+        border-radius: 5px;
+      }
+
+      .section {
+        margin-top: -20px;
+        background-color: rgb(0, 0, 0);
+      }
+
+      .section__container {
+        min-height: 100vh;
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 40px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .subtitle {
+        letter-spacing: 2px;
+        color: white;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .title {
+        font-size: 2.5rem;
+        font-weight: 400;
+        line-height: 3rem;
+        color: white;
+        margin-bottom: 1rem;
+      }
+
+      .title span {
+        font-weight: 600;
+        color: #31d4c4;
+      }
+
+      .description {
+        line-height: 1.5rem;
+        color: white;
+        margin-bottom: 2rem;
+      }
+
+      .action__btns {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .action__btns button {
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        padding: 1rem 2rem;
+        outline: none;
+        border: 2px solid cyan;
+        border-radius: 10px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      .hire__me {
+        background-color: cyan;
+        color: #ffffff;
+        border: 1px;
+        border-radius: 5px;
+        width: 130px;
+        height: 25px;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hire__me:hover {
+        background-color: black;
+      }
+
+      .portfolio {
+        color: black;
+      }
+
+      .image {
+        display: grid;
+        place-items: center;
+      }
+
+      .image img {
+        width: min(25rem, 90%);
+        border-radius: 100%;
+      }
+
+      @media (max-width: 750px) {
+        nav ul {
+          position: fixed;
+          top: 85px;
+          left: -100%;
+          width: 100%;
+          height: calc(100vh - 85px);
+          flex-direction: column;
+          justify-content: center;
+          background-color: var(--extra-light);
+          transition: left 0.3s;
+        }
+
+        nav ul.show {
+          left: 0;
+          height: calc(100vh - 80px);
+        }
+
+        .section__container {
+          padding: 3rem 1rem;
+          text-align: center;
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        .image {
+          grid-area: 1/1/2/2;
+        }
+
+        .action__btns {
+          margin: auto;
+        }
+
+        .about-skills__container,
+        .portfolio__container {
+          padding: 2rem;
+        }
+
+        .portfolio__item {
+          width: 100%;
+        }
+      }
+
+      .about-skills {
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .about-skills__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .about__column,
+      .skills__column {
+        width: 100%;
+        margin: 1rem 0;
+        align-items: center;
+        border: 2px;
+        border-radius: 8px;
+        padding: 1rem;
+        background-color: #ffffff;
+      }
+
+      .about {
+        padding: 50px 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+      }
+
+      .about__title {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+      }
+
+      .about__description {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 0 auto;
+        max-width: 800px;
+      }
+
+      .skills {
+        padding: 50px 20px;
+        background-color: #f1f1f1;
+        text-align: center;
+      }
+
+      .skills__title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .skills__list {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .skills__list li {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 10px 0;
+      }
+
+      .portfolio {
+        padding: 50px 20px;
+        background-color: black;
+        text-align: center;
+      }
+
+      .portfolio__title {
+        color: #31d4c4;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .portfolio__items {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .portfolio__item {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .portfolio__link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #31d4c4;
+        color: white;
+        border-radius: 5px;
+      }
+
+      footer {
+        background-color: black;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      footer a {
+        color: #31d4c4;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__content">
+        <div class="logo"><a>felicity</a></div>
+        <p class="hamburger" id="hamburger-button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul id="nav-links">
+          <li class="three"><a href="#home">Home</a></li>
+          <li class="two"><a href="#about">About</a></li>
+          <li class="two"><a href="#skills">Skills</a></li>
+          <li class="two"><a href="#challenges">Challenges</a></li>
+          <li class="two"><a href="#future">Future</a></li>
+          <li class="one"><a href="#projects">Projects</a></li>
+          <li class="two"><a href="#resume">Resume</a></li>
+          <li class="one"><a href="#contact">Contacts</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section id="home" class="section">
+  <div class="section__container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+    
+    <!-- Text Content -->
+    <div class="content" style="flex: 1 1 50%; padding: 20px;">
+      <p class="subtitle">HELLO</p>
+      <h1 class="title">
+        I'm <span>Felicity Catimbang<br /></span> 3rd Year Student
+      </h1>
+      <p class="description">
+        I’m Felicity Catimbang, a third-year Computer Science Student at Cavite State University - Bacoor Campus. I’m passionate about creating user-centered, visually engaging designs in UI/UX 🎨 and am excited to bring my ideas to life through innovative digital experiences 💻.
+      </p>
+    </div>
+
+    <!-- Image -->
+    <div class="image" style="flex: 1 1 40%; text-align: center; padding: 20px;">
+      <img src="pic1.jpg" alt="Profile picture of Felicity Catimbang" style="width: 400px; height: 400px; object-fit: cover; border-radius: 10px;" />
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- About Me Section -->
+<section id="about" class="about section">
+  <div class="about__container" style="padding: 50px 20px;">
+    <div class="about__column" style="padding: 20px;">
+      <h2 class="about__title">About Me</h2>
+
+      <img src="pic2.jpg" alt="About Me Image" style="width: 200px; height: 200px; object-fit: cover; margin-top: 20px;" />
+      <img src="pic3.jpg" alt="Second About Me Image" style="width: 200px; height: 200px; object-fit: cover; margin-top: 20px;" />
+
+      <p class="about__description" style="text-align: justify; line-height: 1.8;">
+        I'm Felicity Catimbang I'm the kind of person who finds joy in little things. I’m thoughtful I care deeply about people close to me, open up once I feel comfortable I’m not perfect sometimes I procrastinate or doubt myself but I’m always trying to grow and be better than I was yesterday. I believe in staying positive, lifting others up and standing firm even in tough times. Loving deeply and genuinely is just part of who I am.
+      </p>
+      <p class="about__description" style="text-align: justify; line-height: 1.8;">
+        I have four siblings, and I’m the only girl among them which has made my upbringing both unique and memorable. I'm the second to the last child so I’ve experienced both the guidance of my older brothers and the responsibility of being a role model to my younger sibling. Growing up in a family full of boys has shaped me into someone who is strong, understanding, and adaptable. Our family values love, respect, and those are the qualities that continue to guide me in life.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="skills section">
+  <div class="skills__container" style="padding: 50px 20px;">
+    <div class="skills__column" style="padding: 30px;">
+      <h2 class="skills__title">Skills</h2>
+
+      <h3>Technical Skills:</h3>
+      <ul class="skills__list">
+        <li style="flex: 1 1 40%; text-align: center; padding: 20px;">UI/UX Designer:
+          <a class="detail">Creating intuitive and user-friendly designs. Enjoys crafting seamless user experiences and visually appealing interfaces.</a>
+        </li>
+        <li style="flex: 1 1 40%; text-align: center; padding: 20px;">HTML:
+          <a class="detail">Able to structure web content using semantic and accessible HTML elements.</a>
+        </li>
+        <li>CSS:
+          <a class="detail">Proficient in styling web pages for responsive and visually appealing layouts</a>
+        </li>
+        <li>Java:
+          <a class="detail">Knowledgeable in object-oriented programming and building simple applications using Java.</a>
+        </li>
+      </ul>
+      <br>
+
+      <h3>Creative Skills:</h3>
+      <ul class="skills__list">
+        <li>Time Management:
+          <a class="detail">Efficient in organizing tasks and meeting deadlines effectively.</a>
+        </li>
+        <li>Attention to Detail:
+          <a class="detail">Focused on accuracy and precision in both design and code.</a>
+        </li>
+        <li>Creative Thinking:
+          <a class="detail">Enjoys brainstorming and bringing innovative ideas to life.</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Challenges and Learning Section -->
+<section id="challenges" class="skills section">
+  <div class="skills__container" style="padding: 40px 20px;">
+    <div class="skills__column" style="padding: 30px;">
+      <h2 class="skills__title">Challenges and Learning</h2>
+      <p class="about__description" style="text-align: justify; line-height: 1.8;">
+        <strong>Challenges and learning challenges:</strong> I’ve faced is studying computer science At first it felt overwhelming trying to understand complex concepts, coding languages and problem solving techniques that didn’t come easily to me. There were times I doubted myself and felt like giving up but I reminded myself why I started. challenges I’ve faced is learning how to deal with problems without letting them break me Whether it was struggling with school, personal doubts or moments when things didn’t go as planned I had to learn how to stay calm and think clearly At first I used to get easily stressed or overwhelmed But over time I realized that problems are part of life and running from them doesn’t help. 
+      </p>
+      <p class="about__description" style="text-align: justify; line-height: 1.8;">
+        <strong>Acquire life learnings:</strong> I've learned that life is full of ups and downs and it's how you handle those moments that truly matter One of the most valuable lessons I've learned is the importance of resilience how to keep going even when things get tough Life doesn’t always go according to plan but I’ve learned to adapt and find new ways to move forward. Another lesson I’ve gained is the power of kindness and empathy Treating others with respect and understanding has not only helped me build stronger relationships but also brought more peace into my life Lastly I’ve learned that failure is not the end it’s simply a lesson in disguise Every mistake has taught me something whether it was in my studies, personal life, or professional journey I’ve realized that learning never stops and with each day I grow just a little bit more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Future Plans in Life Section -->
+<section id="future" class="skills section">
+  <div class="skills__container" style="padding: 50px 20px;">
+    <div class="skills__column" style="padding: 30px;">
+      <h2 class="skills__title">Future Plans in Life</h2>
+      <p class="about__description" style="text-align: justify; line-height: 1.8;">
+        As I look to the future, my ultimate goal is to become a successful businesswoman I want to create a company that aligns with my passions and values one that not only succeeds financially but also positively impacts the community Alongside my business I plan to own a comfortable home and a car that reflect my hard work and success I believe in the importance of financial independence and stability and I am committed to building a life that gives me the freedom to enjoy the things I love while also being responsible and grounded
+      </p>
+    </div>
+  </div>
+</section>
+
+    <section id="projects" class="portfolio section">
+      <div class="portfolio__container">
+        <h2 class="portfolio__title">My Projects</h2>
+        <div class="portfolio__items">
+          <div class="portfolio__item">
+            <img draggable="false" src="project.png" alt="Project 1 Image" class="portfolio__image" />
+            <h3>My Portfolio</h3>
+            <p>So far, this is the only project I've made. This is my personal portfolio, which I created during the first semester of my third year.</p>
+            <a href="https://github.com/StarU3/My-Portfolio" class="portfolio__link">View Project</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+<section id="resume" class="skills section">
+  <div class="skills__container" style="padding: 50px 20px;">
+    <div class="skills__column" style="padding: 30px;">
+      <h2 class="skills__title">Resume</h2>
+      <p class="about__description">
+        Here’s a quick overview of my academic and professional journey so far. For a more detailed version, feel free to download my full resume using the button below.
+      </p>
+      <a href="resume.pdf" class="portfolio__link" target="_blank" style="margin-top: 20px; display: inline-block;">Download Resume</a>
+    </div>
+  </div>
+</section>
+
+    
+
+    <footer id="contact" class="section">
+      <section id="contact" class="section">
+        <div class="contact-container">
+          <div class="contact-left-title">
+            <h2>Contact Me</h2>
+            <hr />
+          </div>
+          <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="07a164f1-3a5e-4020-906f-c1680e0bcc1f">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </section>
+
+      <div class="footer__container">
+        <p>Email: <a href="catimbangfelicity23@gmail.com">catimbangfelicity23@gmail.com</a></p>
+        <p>Phone: <a href="tel:+639609409979">09609409979</a></p>
+        <div class="social__links">
+          <a href="https://www.facebook.com/share/1BwiHxibHB/" class="social__link">Facebook</a>
+          <a href="https://www.instagram.com/flcty23/profilecard/?igsh=MTlrcnluMTMzdXM2cA==" class="social__link">Instagram</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const links = document.querySelectorAll('nav ul li a');
+      const navLinks = document.getElementById('nav-links');
+      const hamburgerButton = document.getElementById('hamburger-button');
+
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+
+          links.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+
+          navLinks.classList.remove('show'); 
+        });
+      });
+
+      hamburgerButton.addEventListener('click', function() {
+        navLinks.classList.toggle('show');
+      });
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+
+          if (scrollY >= sectionTop - sectionHeight / 2) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        links.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
